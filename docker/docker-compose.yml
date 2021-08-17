@@ -12,22 +12,10 @@ services:
       - ./../data/config:/config
       - ./../data/data1:/data1
       - ./../data/data2:/data2
-    ports:
-      - 8384:8384 # WebUI
-      - 22000:22000/tcp #listen
-      - 22000:22000/udp #listen
-      - 21027:21027/udp #Discovery
-    networks:
-      - default
-      - outside
+    # ports: inactive in network mode host
+    #   - 8384:8384 # WebUI
+    #   - 22000:22000/tcp #listen
+    #   - 22000:22000/udp #listen
+    #   - 21027:21027/udp #Discovery
     restart: always
-networks:
-    default:
-    outside:
-        driver: macvlan
-        driver_opts:
-            parent: enp3s0  #set your host network card here, i.e. eth0
-        ipam:
-            driver: default
-            config:
-                - subnet: 192.168.1.0/24  #set your network addressation here
+    network_mode: host
