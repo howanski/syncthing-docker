@@ -1,4 +1,4 @@
-version: "2.1"
+version: "3.5"
 services:
   syncthing:
     image: ghcr.io/linuxserver/syncthing
@@ -17,4 +17,17 @@ services:
       - 22000:22000/tcp #listen
       - 22000:22000/udp #listen
       - 21027:21027/udp #Discovery
+    networks:
+      - default
+      - outside
     restart: always
+networks:
+    default:
+    outside:
+        driver: macvlan
+        driver_opts:
+            parent: enp3s0  #set your host network card here, i.e. eth0
+        ipam:
+            driver: default
+            config:
+                - subnet: 192.168.1.0/24  #set your network addressation here
