@@ -1,4 +1,3 @@
-version: "3.5"
 services:
   syncthing:
     image: ghcr.io/linuxserver/syncthing
@@ -19,3 +18,8 @@ services:
     #   - 21027:21027/udp #Discovery
     restart: always
     network_mode: host
+    logging:
+      driver: json-file
+      options:
+          max-size: "5m"
+          max-file: "2"
